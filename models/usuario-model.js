@@ -1,4 +1,4 @@
-import { db } from "../db.js";
+import { db } from "../utils/config.js";
 import { DataTypes } from "sequelize";
 // import { Persona } from "./persona.model.js";
 

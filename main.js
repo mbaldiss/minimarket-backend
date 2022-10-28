@@ -1,5 +1,5 @@
 import express from "express";
-import { db } from "./db.js";
+import { db } from "./utils/config.js";
 import { authRouter } from "./routers/auth.router.js";
 import { usuariosRouter } from "./routers/usuarios.router.js";
 // import { personasRouter } from "./routers/personas.router.js";

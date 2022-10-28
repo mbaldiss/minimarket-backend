@@ -1,5 +1,5 @@
 // import { Persona } from "./persona.model.js";
-import { Usuario } from "./usuario.model.js";
+import { Usuario } from "./usuario-model.js";
 // import { Tarea } from "./tarea.model.js";
 // import { Materia } from "./materia.model.js";
 // import { PersonasMaterias } from "// ./personas-materias.model.js";
