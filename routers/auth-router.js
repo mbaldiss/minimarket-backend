@@ -13,7 +13,7 @@ authRouter.post("/registrar", async (req, res) => {
   const passwordHashed = await bcrypt.hash(req.body.contraseña, 8);
   const usuario = await Usuario.findOne({ where: { dni: req.body.dni } });
   if(usuario){
-    res.send("Usuario ya existe");
+    res.status(404).send("Usuario ya existe");
     return;
   }
   const nuevaCuenta = await Usuario.create({
@@ -31,7 +31,7 @@ authRouter.post("/registrar", async (req, res) => {
 authRouter.post("/login", async (req, res) => {
   const usuario = await Usuario.findOne({ where: { dni: req.body.dni } });
   if (!usuario) {
-    res.send("DNI o contraseña inválida");
+    res.status(404).send("DNI o contraseña inválida");
     return;
   }
   const contraseñaCompared = await bcrypt.compare(
@@ -39,7 +39,7 @@ authRouter.post("/login", async (req, res) => {
     usuario.contraseña
   );
   if (!contraseñaCompared) {
-    res.send("DNI o contraseña inválida");
+    res.status(404).send("DNI o contraseña inválida");
     return;
   }
 

@@ -1,10 +1,19 @@
-import { usuariosController } from "../controllers/usuarios-controller.js";
+import { todosLosUsuariosController, usuarioPorDniController } from "../controllers/usuarios-controller.js";
 
-export const usuariosMiddleware = async (req, res) => {
+export const todosLosUsuariosMiddleware = async (req, res) => {
     try {
-        const usuarios = await usuariosController(req, res);
-        res.send(usuarios);
+        await todosLosUsuariosController(req, res);
+        
     } catch (error) {
 
     }
   };
+
+export const usuarioPorDniMiddleware = async (req, res) => {
+    try {
+        await usuarioPorDniController(req, res);
+
+    } catch (error) {
+
+    }
+};
