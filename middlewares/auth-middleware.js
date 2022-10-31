@@ -3,16 +3,15 @@ import bcrypt from "bcryptjs";
 import {
   registrarUsuarioController,
   buscarUsuario,
-  buscarRoles
+  buscarRoles,
 } from "../controllers/auth-controller.js";
 
 export const registrarUsuarioMiddleware = async (req, res) => {
   try {
-    
     const usuario = await buscarUsuario(req.body.dni);
     console.log(usuario);
-    if(usuario){
-        return res.status(404).send("Usuario ya existe");
+    if (usuario) {
+      return res.status(404).send("Usuario ya existe");
     }
     await registrarUsuarioController(req, res);
   } catch (error) {}
@@ -44,7 +43,7 @@ export const loginUsuarioMiddleware = async (req, res) => {
     return res.json({
       dni: usuario.dni,
       nombre: usuario.nombre,
-      token: token,
+      token,
       roles,
     });
   } catch (error) {}

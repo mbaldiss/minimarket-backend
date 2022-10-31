@@ -1,5 +1,6 @@
 import { db } from "../utils/config.js";
 import { DataTypes } from "sequelize";
+import { Usuario, Rol } from "./index.js"
 
 export const Usuario_Rol = db.define(
   "usuario_rol",
@@ -11,19 +12,19 @@ export const Usuario_Rol = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    id_usuario: {
+    usuarioId: {
       field: "id_usuario",
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: "usuario", key: "id" },
+      references: { model: Usuario, key: "id" },
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
-    id_rol: {
+    rolId: {
       field: "id_rol",
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: "rol", key: "id" },
+      references: { model: Rol, key: "id" },
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
