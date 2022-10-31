@@ -4,10 +4,10 @@ import { buscarUsuario } from "./auth-controller.js";
 export const agregarRolController = async (req, res) => {
   try {
     const usuario = await buscarUsuario(req.body.dni);
-
+    console.log("****************************************");
     await Usuario_Rol.create({
-      id_usuario: usuario.id,
-      id_rol: req.body.rol,
+      usuarioId: usuario.id,
+      rolId: req.body.rol,
   });
     return res.send("Rol creado con exito");
   } catch (error) {
