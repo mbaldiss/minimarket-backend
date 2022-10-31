@@ -2,6 +2,7 @@ import express from "express";
 import { db } from "./utils/config.js";
 import { authRouter } from "./routers/auth-router.js";
 import { usuariosRouter } from "./routers/usuarios-router.js";
+import { rolRouter } from "./routers/rol-router.js";
 import cors from "cors";
 import { unknownEndpoint, errorHandler, requestLogger } from "./middlewares/main-middleware.js";
 
@@ -16,6 +17,7 @@ app.use(requestLogger);
 
 app.use("/usuarios", usuariosRouter);
 app.use("/auth", authRouter);
+app.use("/rol", rolRouter);
 
 app.get("/", (req, res) => {
   res.send("API del Minimarket");

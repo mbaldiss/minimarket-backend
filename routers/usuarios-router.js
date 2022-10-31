@@ -1,6 +1,4 @@
 import express from "express";
-// import { Persona, Cuenta } from "../models/index.js";
-// import { Usuario } from "../models/index.js";
 import { todosLosUsuariosMiddleware, usuarioPorDniMiddleware } from "../middlewares/usuarios-middleware.js";
 
 export const usuariosRouter = express.Router();

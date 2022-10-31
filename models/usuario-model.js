@@ -1,16 +1,14 @@
 import { db } from "../utils/config.js";
 import { DataTypes } from "sequelize";
-// import { Persona } from "./persona.model.js";
 
-// Definir modelo de cuenta
 export const Usuario = db.define(
   "usuario",
   {
     id: {
       field: "id",
       type: DataTypes.INTEGER,
-      allowNull: true,
-      autoIncrement: false,
+      allowNull: false,
+      autoIncrement: true,
       primaryKey: true,
     },
     dni: {
