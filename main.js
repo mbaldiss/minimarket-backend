@@ -3,8 +3,14 @@ import { db } from "./utils/config.js";
 import { authRouter } from "./routers/auth-router.js";
 import { usuariosRouter } from "./routers/usuarios-router.js";
 import { rolRouter } from "./routers/rol-router.js";
+import { productosRouter } from "./routers/productos-router.js";
+import { stockRouter } from "./routers/stock-router.js";
 import cors from "cors";
-import { unknownEndpoint, errorHandler, requestLogger } from "./middlewares/main-middleware.js";
+import {
+  unknownEndpoint,
+  errorHandler,
+  requestLogger,
+} from "./middlewares/main-middleware.js";
 
 const app = express();
 
@@ -18,6 +24,8 @@ app.use(requestLogger);
 app.use("/usuarios", usuariosRouter);
 app.use("/auth", authRouter);
 app.use("/rol", rolRouter);
+app.use("/productos", productosRouter);
+app.use("/stock", stockRouter);
 
 app.get("/", (req, res) => {
   res.send("API del Minimarket");

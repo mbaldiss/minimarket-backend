@@ -11,6 +11,6 @@ export const agregarRolController = async (req, res) => {
     });
     return res.send("Rol creado con exito");
   } catch (error) {
-    res.send(error.message);
+    console.log(error);
   }
 };

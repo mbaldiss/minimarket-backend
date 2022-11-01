@@ -8,11 +8,11 @@ export const agregarRol = async (req, res) => {
       ? await buscarRoles(usuario.id)
       : res.send("Usuario inexistente");
 
-    roles = roles.filter((rol) => (req.body.rol === rol.rolId ? true : false));
+    roles = roles.filter((rol) => req.body.rol === rol.rolId);
     roles.length === 0
       ? await agregarRolController(req, res)
       : res.send("Rol ya existente para este usuario");
   } catch (error) {
-    res.send(error.message);
+    console.log(error);
   }
 };

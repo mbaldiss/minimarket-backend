@@ -2,24 +2,14 @@
 import { Usuario } from "./usuario-model.js";
 import { Rol } from "./rol-model.js";
 import { Usuario_Rol } from "./usuario_rol-model.js";
-// import { Tarea } from "./tarea.model.js";
-// import { Materia } from "./materia.model.js";
-// import { PersonasMaterias } from "// ./personas-materias.model.js";
-
-// Relaciones de cuentas
-// Usuario.hasMany(Cuenta);
-// Cuenta.belongsTo(Persona);
-
-// Relaciones de tareas
-// Persona.hasMany(Tarea);
-// Tarea.belongsTo(Persona);
-
-// Relaciones de personas_materias
-// Persona.belongsToMany(Materia, { through: PersonasMaterias });
-// Materia.belongsToMany(Persona, { through: PersonasMaterias });
+import { Producto } from "./producto-model.js";
+import { Stock } from "./stock-model.js";
+import { Producto_Stock } from "./producto_stock-model.js";
 
 Usuario.belongsToMany(Rol, { through: Usuario_Rol });
 Rol.belongsToMany(Usuario, { through: Usuario_Rol });
 
-// export { Persona, Cuenta, Tarea, Materia, PersonasMaterias };
-export { Usuario, Rol, Usuario_Rol };
+Producto.belongsToMany(Stock, { through: Producto_Stock });
+Stock.belongsToMany(Producto, { through: Producto_Stock });
+
+export { Usuario, Rol, Usuario_Rol, Producto, Stock, Producto_Stock };

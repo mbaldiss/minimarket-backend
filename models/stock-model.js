@@ -1,8 +1,8 @@
 import { db } from "../utils/config.js";
 import { DataTypes } from "sequelize";
 
-export const Rol = db.define(
-  "rol",
+export const Stock = db.define(
+  "stock",
   {
     id: {
       field: "id",
@@ -11,15 +11,11 @@ export const Rol = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    descripcion: {
-      field: "descripcion",
-      allowNull: false,
-      type: DataTypes.TEXT,
-    },
+    lugar: { field: "lugar", allowNull: false, type: DataTypes.TEXT },
   },
   {
-    name: { singular: "rol", plural: "roles" },
-    tableName: "roles",
+    name: { singular: "stock", plural: "stocks" },
+    tableName: "stock",
     timestamps: false,
   }
 );

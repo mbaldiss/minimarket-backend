@@ -8,12 +8,12 @@ export const registrarUsuarioController = async (req, res) => {
     const passwordHashed = await bcrypt.hash(req.body.contraseña, 8);
 
     await Usuario.create({
-        dni: req.body.dni,
-        contraseña: passwordHashed,
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-        fecha_nacimiento: req.body.fecha_nacimiento,
-        fecha_ingreso: req.body.fecha_ingreso,
+      dni: req.body.dni,
+      contraseña: passwordHashed,
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      fecha_nacimiento: req.body.fecha_nacimiento,
+      fecha_ingreso: req.body.fecha_ingreso,
     });
     return res.send("Usuario creado con exito");
   } catch (error) {
@@ -23,20 +23,16 @@ export const registrarUsuarioController = async (req, res) => {
 
 export const buscarUsuario = async (dni) => {
   try {
-    
     const usuario = await Usuario.findOne({ where: { dni: dni } });
-    
+
     return usuario;
-  } catch(error){
-  }
-}
+  } catch (error) {}
+};
 
 export const buscarRoles = async (id) => {
   try {
-    
     const roles = await Usuario_Rol.findAll({ where: { id_usuario: id } });
-    
+
     return roles;
-  } catch(error){
-  }
-}
+  } catch (error) {}
+};

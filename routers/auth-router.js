@@ -1,7 +1,10 @@
 import express from "express";
 import passport from "passport";
 
-import { registrarUsuarioMiddleware, loginUsuarioMiddleware } from "../middlewares/auth-middleware.js"
+import {
+  registrarUsuarioMiddleware,
+  loginUsuarioMiddleware,
+} from "../middlewares/auth-middleware.js";
 
 export const authRouter = express.Router();
 

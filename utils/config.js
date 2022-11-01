@@ -13,6 +13,3 @@ export const db = new Sequelize(
     dialect: "mysql",
   }
 );
-
-
-

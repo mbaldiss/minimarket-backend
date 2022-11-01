@@ -1,9 +1,9 @@
 import { db } from "../utils/config.js";
 import { DataTypes } from "sequelize";
-import { Usuario, Rol } from "./index.js";
+import { Producto, Stock } from "./index.js";
 
-export const Usuario_Rol = db.define(
-  "usuario_rol",
+export const Producto_Stock = db.define(
+  "producto_stock",
   {
     id: {
       field: "id",
@@ -12,27 +12,32 @@ export const Usuario_Rol = db.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    usuarioId: {
-      field: "id_usuario",
+    productoId: {
+      field: "id_producto",
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: Usuario, key: "id" },
+      references: { model: Producto, key: "id" },
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
-    rolId: {
-      field: "id_rol",
+    stockId: {
+      field: "id_stock",
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: Rol, key: "id" },
+      references: { model: Stock, key: "id" },
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
+    },
+    cantidad: {
+      field: "cantidad",
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
 
   {
-    name: { singular: "usuario_rol", plural: "usuarios_roles" },
-    tableName: "usuario_rol",
+    name: { singular: "producto_stock", plural: "productos_stocks" },
+    tableName: "producto_stock",
     timestamps: false,
   }
 );
