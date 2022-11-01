@@ -37,8 +37,10 @@ export const putCantidadProductoMiddleware = async (req, res) => {
       : res.send("Producto inexistente");
 
     const stock = producto.id
-      ? await buscarStock(producto.id, req.body.origen)
-      : false;
+      ? (await buscarStock(producto.id, req.body.origen))
+        ? await buscarStock(producto.id, req.body.origen)
+        : res.send("No hay stock")
+      : res.send("No hay stock");
 
     stock.cantidad >= req.body.cantidad
       ? await putCantidadProductoController(req, res, stock, producto)

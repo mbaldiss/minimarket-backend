@@ -29,7 +29,7 @@ export const postBuscarProductoController = async (req, res) => {
     const producto = await Producto.findOne({
       where: { codigo_barra: req.body.codigo_barra },
     });
-    return res.send(producto);
+    producto ? res.send(producto) : res.send("Producto inexistente");
   } catch (error) {
     console.log(error);
   }
@@ -37,10 +37,13 @@ export const postBuscarProductoController = async (req, res) => {
 
 export const deleteBorrarProductoController = async (req, res) => {
   try {
-    await Producto.destroy({
+    const producto = await Producto.destroy({
       where: { codigo_barra: req.body.codigo_barra },
     });
-    return res.send("Producto borrado correctamente");
+
+    producto
+      ? res.send("Producto borrado correctamente")
+      : res.send("Producto inexistente");
   } catch (error) {
     console.log(error);
   }
@@ -50,7 +53,7 @@ export const putModificarProductoController = async (req, res) => {
   try {
     const body = req.body;
 
-    await Producto.update(
+    const producto = await Producto.update(
       { ...body },
       {
         where: {
@@ -58,7 +61,14 @@ export const putModificarProductoController = async (req, res) => {
         },
       }
     );
-    return res.send("Producto modificado correctamente: ");
+
+    producto[0]
+      ? res.send("Producto modificado correctamente")
+      : (await Producto.findOne({
+          where: { codigo_barra: req.body.codigo_barra },
+        }))
+      ? res.send("Producto modificado correctamente")
+      : res.send("Producto inexistente");
   } catch (error) {
     console.log(error);
   }
