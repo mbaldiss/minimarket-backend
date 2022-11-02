@@ -62,29 +62,38 @@ export const putCantidadProductoController = async (
   try {
     const stockDestino = await buscarStock(producto.id, req.body.destino);
 
-    stockDestino
-      ? await Producto_Stock.update(
-          {
-            cantidad: stockDestino.cantidad + req.body.cantidad,
-          },
-          {
-            where: { id_stock: req.body.destino },
-          }
-        )
-      : await Producto_Stock.create({
-          productoId: producto.id,
-          stockId: req.body.destino,
-          cantidad: req.body.cantidad,
-        });
-
-    await Producto_Stock.update(
-      {
-        cantidad: stock.cantidad - req.body.cantidad,
-      },
-      {
-        where: { id_stock: req.body.origen },
-      }
-    );
+    if (stockDestino) {
+      await Producto_Stock.update(
+        {
+          cantidad: stockDestino.cantidad + req.body.cantidad,
+        },
+        {
+          where: { id_stock: req.body.destino, id_producto: producto.id },
+        }
+      );
+      await Producto_Stock.update(
+        {
+          cantidad: stock.cantidad - req.body.cantidad,
+        },
+        {
+          where: { id_stock: req.body.origen, id_producto: producto.id },
+        }
+      );
+    } else {
+      await Producto_Stock.create({
+        productoId: producto.id,
+        stockId: req.body.destino,
+        cantidad: req.body.cantidad,
+      });
+      await Producto_Stock.update(
+        {
+          cantidad: stock.cantidad - req.body.cantidad,
+        },
+        {
+          where: { id_stock: req.body.origen, id_producto: producto.id },
+        }
+      );
+    }
 
     return res.send("Stock modificado correctamente");
   } catch (error) {

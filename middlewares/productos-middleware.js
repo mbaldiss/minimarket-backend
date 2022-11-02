@@ -4,6 +4,7 @@ import {
   postBuscarProductoController,
   deleteBorrarProductoController,
   putModificarProductoController,
+  postCheckProductoController,
 } from "../controllers/productos-controller.js";
 
 export const getTodosLosProductosMiddleware = async (req, res) => {
@@ -14,7 +15,10 @@ export const getTodosLosProductosMiddleware = async (req, res) => {
 
 export const postProductoMiddleware = async (req, res) => {
   try {
-    await postProductoController(req, res);
+    const producto = await postCheckProductoController(req.body.codigo_barra);
+    producto
+      ? res.send("Codigo de barra existente")
+      : await postProductoController(req, res);
   } catch (error) {}
 };
 

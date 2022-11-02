@@ -1,4 +1,4 @@
-import { Producto } from "../models/producto-model.js";
+import { Producto, Producto_Stock } from "../models/index.js";
 
 export const postProductoController = async (req, res) => {
   try {
@@ -17,7 +17,49 @@ export const postProductoController = async (req, res) => {
 
 export const getTodosLosProductosController = async (req, res) => {
   try {
-    const productos = await Producto.findAll();
+    let productos = await Producto.findAll();
+    let stock = await Producto_Stock.findAll();
+
+    productos = productos.map((producto) => {
+      const deposito = stock.find((s) => {
+        if (s.productoId === producto.id && s.stockId === 1) {
+          return s.cantidad;
+        }
+      });
+      const salon = stock.find((s) => {
+        if (s.productoId === producto.id && s.stockId === 2) {
+          return s.cantidad;
+        }
+      });
+      return {
+        ...producto.dataValues,
+        deposito:
+          deposito !== undefined
+            ? deposito.cantidad !== undefined
+              ? deposito.cantidad
+              : 0
+            : 0,
+        salon:
+          salon !== undefined
+            ? salon.cantidad !== undefined
+              ? salon.cantidad
+              : 0
+            : 0,
+        total:
+          (deposito !== undefined
+            ? deposito.cantidad !== undefined
+              ? deposito.cantidad
+              : 0
+            : 0) +
+          (salon !== undefined
+            ? salon.cantidad !== undefined
+              ? salon.cantidad
+              : 0
+            : 0),
+        acciones: `<h1>holis</h1>`
+      };
+    });
+
     return res.send(productos);
   } catch (error) {
     console.log(error);
@@ -30,6 +72,17 @@ export const postBuscarProductoController = async (req, res) => {
       where: { codigo_barra: req.body.codigo_barra },
     });
     producto ? res.send(producto) : res.send("Producto inexistente");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const postCheckProductoController = async (codigo_barra) => {
+  try {
+    const producto = await Producto.findOne({
+      where: { codigo_barra: codigo_barra },
+    });
+    return producto;
   } catch (error) {
     console.log(error);
   }
