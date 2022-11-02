@@ -56,7 +56,6 @@ export const getTodosLosProductosController = async (req, res) => {
               ? salon.cantidad
               : 0
             : 0),
-        acciones: `<h1>holis</h1>`
       };
     });
 
