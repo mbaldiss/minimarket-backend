@@ -70,6 +70,7 @@ export const postBuscarProductoController = async (req, res) => {
     const producto = await Producto.findOne({
       where: { codigo_barra: req.body.codigo_barra },
     });
+    
     producto ? res.send(producto) : res.send("Producto inexistente");
   } catch (error) {
     console.log(error);

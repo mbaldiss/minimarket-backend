@@ -19,19 +19,15 @@ export const registrarUsuarioMiddleware = async (req, res) => {
 
 export const loginUsuarioMiddleware = async (req, res) => {
   try {
-    const usuario = await buscarUsuario(req.body.dni);
+    const usuario = await buscarUsuario(req, res);
     const roles = await buscarRoles(usuario.id);
-
-    if (!usuario) {
-      return res.status(404).send("DNI inexistente");
-    }
 
     const contraseñaCompared = await bcrypt.compare(
       req.body.contraseña,
       usuario.contraseña
     );
     if (!contraseñaCompared) {
-      return res.status(404).send("Contraseña incorrecta");
+      return res.status(403).send("Contraseña incorrecta");
     }
 
     const payload = {

@@ -3,7 +3,7 @@ import { buscarUsuario } from "./auth-controller.js";
 
 export const agregarRolController = async (req, res) => {
   try {
-    const usuario = await buscarUsuario(req.body.dni);
+    const usuario = await buscarUsuario(req, res);
 
     await Usuario_Rol.create({
       usuarioId: usuario.id,

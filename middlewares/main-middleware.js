@@ -1,10 +1,11 @@
 import { info, errorr } from "../utils/logger.js";
 
 export const requestLogger = (request, response, next) => {
+  info("===================================================");
   info("Method:", request.method);
   info("Path:  ", request.path);
   info("Body:  ", request.body);
-  info("---");
+  info("===================================================");
   next();
 };
 

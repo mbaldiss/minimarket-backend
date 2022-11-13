@@ -21,11 +21,14 @@ export const registrarUsuarioController = async (req, res) => {
   }
 };
 
-export const buscarUsuario = async (dni) => {
+export const buscarUsuario = async (req, res) => {
   try {
-    const usuario = await Usuario.findOne({ where: { dni: dni } });
-
-    return usuario;
+    const usuario = await Usuario.findOne({ where: { dni: req.body.dni } });
+    if (usuario) {
+      return usuario;
+    } else {
+      return res.status(404).send("Usuario inexistente");
+    }
   } catch (error) {}
 };
 

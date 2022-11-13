@@ -3,7 +3,7 @@ import { buscarRoles, buscarUsuario } from "../controllers/auth-controller.js";
 
 export const agregarRol = async (req, res) => {
   try {
-    const usuario = await buscarUsuario(req.body.dni);
+    const usuario = await buscarUsuario(req, res);
     let roles = usuario
       ? await buscarRoles(usuario.id)
       : res.send("Usuario inexistente");
