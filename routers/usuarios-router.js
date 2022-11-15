@@ -14,4 +14,4 @@ usuariosRouter.get("/", todosLosUsuariosMiddleware);
 usuariosRouter.get("/:dni", usuarioPorDniMiddleware);
 
 // PUT / un usuario por dni
-usuariosRouter.put("/:dni", putModificarUsuarioMiddleware);
+usuariosRouter.put("/", putModificarUsuarioMiddleware);
