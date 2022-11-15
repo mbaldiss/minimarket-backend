@@ -12,7 +12,7 @@ export const productosRouter = express.Router();
 // GET / todos los productos
 productosRouter.get("/", getTodosLosProductosMiddleware);
 
-// POST / guardar producto
+// POST / 
 productosRouter.post("/", postProductoMiddleware);
 
 // POST / buscar producto por codigo de barra

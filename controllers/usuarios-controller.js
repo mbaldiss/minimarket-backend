@@ -13,3 +13,26 @@ export const usuarioPorDniController = async (req, res) => {
     res.send(usuario);
   } catch (error) {}
 };
+
+export const PutModificarUsuarioController = async (req, res) => {
+  try {
+    const body = req.body;
+    const usuario = await Usuario.update(
+      { ...body },
+      {
+        where: {
+          dni: body.dni,
+        },
+      }
+    );
+    usuario[0]
+      ? res.send("Usuario modificado correctamente")
+      : (await Usuario.findOne({
+          where: { dni: req.body.dni },
+        }))
+      ? res.send("Usuario modificado correctamente")
+      : res.send("Usuario inexistente");
+  } catch (error) {
+    console.log(error);
+  }
+};
