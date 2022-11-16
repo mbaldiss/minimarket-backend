@@ -5,3 +5,7 @@ export const rolRouter = express.Router();
 
 // POST / agregar rol a usuario
 rolRouter.post("/", agregarRol);
+
+
+
+

@@ -1,4 +1,4 @@
-import { agregarRolController } from "../controllers/rol-controller.js";
+import { agregarRolController} from "../controllers/rol-controller.js";
 import { buscarRoles, buscarUsuario } from "../controllers/auth-controller.js";
 
 export const agregarRol = async (req, res) => {
@@ -16,3 +16,6 @@ export const agregarRol = async (req, res) => {
     console.log(error);
   }
 };
+
+
+
