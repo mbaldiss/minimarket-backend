@@ -17,7 +17,7 @@ export const postProductoMiddleware = async (req, res) => {
   try {
     const producto = await postCheckProductoController(req.body.codigo_barra);
     producto
-      ? res.status(404).send("Codigo de barra existente")
+      ? res.status(400).send("Codigo de barra existente")
       : await postProductoController(req, res);
   } catch (error) {}
 };

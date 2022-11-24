@@ -44,6 +44,6 @@ export const putCantidadProductoMiddleware = async (req, res) => {
 
     stock.cantidad >= req.body.cantidad
       ? await putCantidadProductoController(req, res, stock, producto)
-      : res.send("La cantidad solicitada supera a la existente");
+      : res.status(400).send("La cantidad solicitada supera a la existente");
   } catch (error) {}
 };
